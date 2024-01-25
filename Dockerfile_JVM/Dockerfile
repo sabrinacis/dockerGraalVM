@@ -1,6 +1,6 @@
 FROM openjdk:21
 VOLUME /tmp
-EXPOSE 8085
-ARG JAR_FILE=target/*.jar
-ADD ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+EXPOSE 7082
+ARG JAR_FILE=/*.jar
+ADD ${JAR_FILE} appjvm21.jar
+ENTRYPOINT ["java","-jar","/appjvm21.jar"]
