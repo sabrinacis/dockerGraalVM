@@ -1,0 +1,57 @@
+/home/sabrina/IdeaProjects/springNativeJFR/target/springNativeJFR-0.0.1-SNAPSHOT.jar
+1)REPOSITORY:
+
+git clone https://github.com/sabrinacis/demo-jvm21.git
+
+
+2)CREATED IMAGE:
+
+docker build -t demo-jvm21:1.0.0 .
+
+docker images
+
+REPOSITORY    TAG       IMAGE ID       CREATED         SIZE
+demo-jvm21    1.0.0     88069d2fb9b5   2 minutes ago   548MB
+
+
+3)RUN:
+
+docker run -p 7082:7082 demo-jvm21:1.0.0 .
+
+
+4)TEST:
+ab -n10 -c10 -s50000 http://localhost:7082/jvm/springBoot3
+curl "http://localhost:7082/jvm/springBoot3"
+
+
+
+---------------------------------------------------------------------------------------------
+ERRORES:
+1)Solving /var/lib/dpkg/lock - open (13: Permission denied) with "are you root?"
+
+sudo apt-get update && apt-get upgrade 
+I'm acting as root and have ensured that none of the update managers are running. First I tried to check what was locking it using:
+
+sudo lsof /var/lib/dpkg/lock
+with output of:
+
+lsof: WARNING: can't stat() fuse.gvfs-fuse-daemon file system /home/gareth/.gvfs
+Output information may be incomplete.
+Just in case I have tried to remove the lock using:
+
+sudo rm /var/lib/apt/lists/lock
+sudo rm /var/cache/apt/archives/lock
+...to no avail. Interestingly, if I am actually root and use:
+
+sudo -s 
+apt-get update && apt-get upgrade
+
+
+2) usr-bin-ld-cannot-find-ll-no-such-file-or-directory
+
+sudo apt install libfl-dev
+
+3) "/usr/bin/ld: cannot find -lz"
+For x64 install zlib1g-dev.
+
+sudo apt-get install zlib1g-dev
