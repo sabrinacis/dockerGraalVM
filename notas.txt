@@ -1,0 +1,23 @@
+#1) Creación ejecutable   
+
+mvn package -DskipTests -Dnative -Dquarkus.native.container-build=true
+
+./target/rest-json-quickstart-1.0.0-SNAPSHOT-runner
+
+curl http://localhost:8080/fruits
+
+
+#2) Creacion de Imagen
+			 		 
+docker build -f /home/sabrina/repo/demoQuarkus/src/main/docker/Dockerfile.jvm -t quarkus/rest-json-quickstart-jvm .
+
+docker images
+
+
+#3) Correr la Imagen
+
+docker ps
+
+docker run --rm -p 8080:8080 localhost/quarkus/rest-json-quickstart-jvm 
+
+curl http://localhost:8080/fruits
